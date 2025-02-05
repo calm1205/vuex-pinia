@@ -5,7 +5,7 @@ declare module "*.vue" {
 }
 
 import { ComponentCustomProperties } from "vue";
-import { State } from "./store/store";
+import { State } from "./vuex/store";
 import { Store } from "vuex";
 
 declare module "vue" {
