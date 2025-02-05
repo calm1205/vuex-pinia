@@ -21,5 +21,8 @@ export const useUserStore = defineStore("user", {
       // const store = useStore();
       // return store.state.countModule?.count;
     },
+    incrementVuexCount() {
+      vuexStore.dispatch("countModule/increment");
+    },
   },
 });

@@ -16,6 +16,7 @@ export default {
     ...mapActions(useUserStore, [
       "getVuexCountFromStore",
       "getVuexCountFromUseStore",
+      "incrementVuexCount",
     ]),
     ...mapVuexActions("countModule", ["increment"]),
     logState() {
@@ -46,10 +47,19 @@ export default {
 </script>
 
 <template>
-  <HelloWorld msg="Vite + Vue" />
-  <button @click="increment">increment</button>
-  <p>count is {{ count }}</p>
-  <button @click="logState">show log</button>
+  <section>
+    <HelloWorld msg="Vite + Vue" />
+    <p>count is {{ count }}</p>
+    <button @click="increment">increment vuex count</button>
+    <button @click="incrementVuexCount">increment vuex count from pinia</button>
+    <button @click="logState">show log</button>
+  </section>
 </template>
 
-<style scoped></style>
+<style scoped>
+section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+</style>
