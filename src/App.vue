@@ -14,30 +14,40 @@ export default {
   },
   methods: {
     ...mapActions(useUserStore, [
+      "getVuexGlobalCount",
       "getVuexCountFromStore",
       "getVuexCountFromUseStore",
       "incrementVuexCount",
     ]),
+    ...mapVuexActions(["incrementGlobalCount"]),
     ...mapVuexActions("countModule", ["increment"]),
     logState() {
-      console.log("[pinia] name: ", this.name);
+      this.logPinia();
+      this.logVuex();
+      console.log("==============================");
+    },
+    logPinia() {
+      console.group("[pinia]");
+      console.log("name: ", this.name);
+      console.log("vuex global count: ", this.getVuexGlobalCount());
+      console.log("vuex count from store: ", this.getVuexCountFromStore());
       console.log(
-        "[pinia] vuex count from store: ",
-        this.getVuexCountFromStore()
-      );
-      console.log(
-        "[pinia] vuex count from useStore: ",
+        "vuex count from useStore: ",
         this.getVuexCountFromUseStore()
       );
-      console.log("[vuex] countModule count: ", store.state.countModule?.count);
-      console.log(
-        "[vuex] $store count: ",
-        this.$store.state.countModule?.count
-      );
+      console.groupEnd();
+    },
+    logVuex() {
+      console.group("[vuex]");
+      console.log("globalCount: ", store.getters.globalCount);
+      console.log("countModule count: ", store.state.countModule?.count);
+      console.log("$store count: ", this.$store.state.countModule?.count);
+      console.groupEnd();
     },
   },
   computed: {
     ...mapState(useUserStore, ["name"]),
+    ...mapVuexGetters(["globalCount"]),
     ...mapVuexGetters("countModule", ["count"]),
   },
   mounted() {
@@ -50,8 +60,10 @@ export default {
   <section>
     <HelloWorld msg="Vite + Vue" />
     <p>count is {{ count }}</p>
+    <p>globalCount is {{ globalCount }}</p>
     <button @click="increment">increment vuex count</button>
     <button @click="incrementVuexCount">increment vuex count from pinia</button>
+    <button @click="incrementGlobalCount">increment vuex global count</button>
     <button @click="logState">show log</button>
   </section>
 </template>

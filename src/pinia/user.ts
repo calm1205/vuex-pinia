@@ -13,6 +13,9 @@ export const useUserStore = defineStore("user", {
     setName(name: string) {
       this.name = name;
     },
+    getVuexGlobalCount() {
+      return vuexStore.state.globalCount?.globalCount;
+    },
     getVuexCountFromStore() {
       return vuexStore.state.countModule?.count;
     },

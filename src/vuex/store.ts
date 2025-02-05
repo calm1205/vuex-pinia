@@ -17,6 +17,19 @@ export const store = createStore<State>({
     globalCount,
     globalOrder,
   },
+  getters: {
+    globalCount(state) {
+      return state.globalCount.globalCount;
+    },
+    globalOrder(state) {
+      return state.globalOrder.globalOrder;
+    },
+  },
+  actions: {
+    incrementGlobalCount({ state }) {
+      state.globalCount.globalCount++;
+    },
+  },
   modules: {
     countModule,
     orderModule,
