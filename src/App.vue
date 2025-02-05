@@ -14,12 +14,12 @@ export default {
   },
   methods: {
     ...mapActions(useUserStore, [
-      "getVuexGlobalCount",
+      "getVuexRootCount",
       "getVuexCountFromStore",
       "getVuexCountFromUseStore",
       "incrementVuexCount",
     ]),
-    ...mapVuexActions(["incrementGlobalCount"]),
+    ...mapVuexActions(["incrementRootCount"]),
     ...mapVuexActions("countModule", ["increment"]),
     logState() {
       this.logPinia();
@@ -29,7 +29,7 @@ export default {
     logPinia() {
       console.group("[pinia]");
       console.log("name: ", this.name);
-      console.log("vuex global count: ", this.getVuexGlobalCount());
+      console.log("vuex root count: ", this.getVuexRootCount());
       console.log("vuex count from store: ", this.getVuexCountFromStore());
       console.log(
         "vuex count from useStore: ",
@@ -39,7 +39,7 @@ export default {
     },
     logVuex() {
       console.group("[vuex]");
-      console.log("globalCount: ", store.getters.globalCount);
+      console.log("rootCount: ", store.getters.rootCount);
       console.log("countModule count: ", store.state.countModule?.count);
       console.log("$store count: ", this.$store.state.countModule?.count);
       console.groupEnd();
@@ -47,7 +47,7 @@ export default {
   },
   computed: {
     ...mapState(useUserStore, ["name"]),
-    ...mapVuexGetters(["globalCount"]),
+    ...mapVuexGetters(["rootCount"]),
     ...mapVuexGetters("countModule", ["count"]),
   },
   mounted() {
@@ -60,10 +60,10 @@ export default {
   <section>
     <HelloWorld msg="Vite + Vue" />
     <p>count is {{ count }}</p>
-    <p>globalCount is {{ globalCount }}</p>
+    <p>rootCount is {{ rootCount }}</p>
     <button @click="increment">increment vuex count</button>
     <button @click="incrementVuexCount">increment vuex count from pinia</button>
-    <button @click="incrementGlobalCount">increment vuex global count</button>
+    <button @click="incrementRootCount">increment vuex root count</button>
     <button @click="logState">show log</button>
   </section>
 </template>

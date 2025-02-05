@@ -1,33 +1,33 @@
 import { createStore } from "vuex";
 import { countModule, type CountState } from "./module/countModule";
-import { globalCount } from "./global/globalCount";
-import { globalOrder } from "./global/globalOrder";
+import { rootCount } from "./root/rootCount";
+import { rootOrder } from "./root/rootOrder";
 import { orderModule, type OrderState } from "./module/orderModule";
 
-interface GlobalState {
-  globalCount: typeof globalCount;
-  globalOrder: typeof globalOrder;
+interface RootState {
+  rootCount: typeof rootCount;
+  rootOrder: typeof rootOrder;
 }
-export type State = GlobalState & { countModule?: CountState } & {
+export type State = RootState & { countModule?: CountState } & {
   orderModule?: OrderState;
 };
 
 export const store = createStore<State>({
   state: {
-    globalCount,
-    globalOrder,
+    rootCount,
+    rootOrder,
   },
   getters: {
-    globalCount(state) {
-      return state.globalCount.globalCount;
+    rootCount(state) {
+      return state.rootCount.rootCount;
     },
-    globalOrder(state) {
-      return state.globalOrder.globalOrder;
+    rootOrder(state) {
+      return state.rootOrder.rootOrder;
     },
   },
   actions: {
-    incrementGlobalCount({ state }) {
-      state.globalCount.globalCount++;
+    incrementRootCount({ state }) {
+      state.rootCount.rootCount++;
     },
   },
   modules: {
