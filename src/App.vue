@@ -1,6 +1,11 @@
 <script lang="ts">
 import HelloWorld from "./components/HelloWorld.vue";
-import { mapGetters, mapActions } from "vuex";
+import {
+  mapGetters as mapVuexGetters,
+  mapActions as mapVuexActions,
+} from "vuex";
+import { mapState, mapActions } from "pinia";
+import { useUserStore } from "./pinia/user";
 import { store } from "./vuex/store";
 
 export default {
@@ -8,43 +13,43 @@ export default {
     HelloWorld,
   },
   methods: {
-    ...mapActions("countModule", ["increment"]),
+    ...mapActions(useUserStore, [
+      "getVuexCountFromStore",
+      "getVuexCountFromUseStore",
+    ]),
+    ...mapVuexActions("countModule", ["increment"]),
+    logState() {
+      console.log("[pinia] name: ", this.name);
+      console.log(
+        "[pinia] vuex count from store: ",
+        this.getVuexCountFromStore()
+      );
+      console.log(
+        "[pinia] vuex count from useStore: ",
+        this.getVuexCountFromUseStore()
+      );
+      console.log("[vuex] countModule count: ", store.state.countModule?.count);
+      console.log(
+        "[vuex] $store count: ",
+        this.$store.state.countModule?.count
+      );
+    },
   },
   computed: {
-    ...mapGetters("countModule", ["count"]),
+    ...mapState(useUserStore, ["name"]),
+    ...mapVuexGetters("countModule", ["count"]),
   },
   mounted() {
-    console.log(store.state.countModule?.count);
-    console.log(this.$store.state.countModule?.count);
+    this.logState();
   },
 };
 </script>
 
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
   <HelloWorld msg="Vite + Vue" />
   <button @click="increment">increment</button>
   <p>count is {{ count }}</p>
+  <button @click="logState">show log</button>
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
+<style scoped></style>
