@@ -1,7 +1,7 @@
 <script lang="ts">
 import HelloWorld from "./components/HelloWorld.vue";
 import { mapGetters, mapActions } from "vuex";
-import { store } from "./store/store";
+import { store } from "./vuex/store";
 
 export default {
   components: {
