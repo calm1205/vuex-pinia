@@ -1,9 +1,11 @@
-<script setup lang="ts">
-defineProps<{ msg: string }>();
+<script setup>
+import { useUserStore } from "../pinia/user";
+const store = useUserStore();
+const msg = store.name;
 </script>
 
 <template>
-  <h1>{{ msg }}</h1>
+  <h1>name: {{ msg }}</h1>
 </template>
 
 <style scoped>
