@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { useUserStore } from "../pinia/user";
 const store = useUserStore();
 const msg = store.name;

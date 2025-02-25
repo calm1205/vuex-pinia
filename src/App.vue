@@ -1,5 +1,6 @@
 <script lang="ts">
 import HelloWorld from "./components/HelloWorld.vue";
+import OptionsComponent from "./components/OptionsComponent.vue";
 import {
   mapGetters as mapVuexGetters,
   mapActions as mapVuexActions,
@@ -11,6 +12,7 @@ import { store } from "./vuex/store";
 export default {
   components: {
     HelloWorld,
+    OptionsComponent,
   },
   methods: {
     ...mapActions(useUserStore, [
@@ -59,6 +61,7 @@ export default {
 <template>
   <section>
     <HelloWorld msg="Vite + Vue" />
+    <OptionsComponent title="hoge" @event-msg="logVuex" />
     <p>count is {{ count }}</p>
     <p>rootCount is {{ rootCount }}</p>
     <button @click="increment">increment vuex count</button>
@@ -72,6 +75,6 @@ export default {
 section {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 8px;
 }
 </style>
