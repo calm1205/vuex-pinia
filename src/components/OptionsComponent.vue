@@ -1,10 +1,10 @@
-<script>
+<script lang="ts">
 export default {
   name: "OptionsComponent",
   data() {
     return {
       dataMsg: "Hello, Options API!",
-    };
+    }
   },
   props: {
     title: String,
@@ -12,10 +12,10 @@ export default {
   emits: ["event-msg"],
   methods: {
     eventMsg() {
-      this.$emit("event-msg", "Hello, Options API!");
+      this.$emit("event-msg", "Hello, Options API!")
     },
   },
-};
+}
 </script>
 
 <template>

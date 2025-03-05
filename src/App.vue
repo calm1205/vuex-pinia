@@ -1,13 +1,10 @@
 <script lang="ts">
-import HelloWorld from "./components/HelloWorld.vue";
-import OptionsComponent from "./components/OptionsComponent.vue";
-import {
-  mapGetters as mapVuexGetters,
-  mapActions as mapVuexActions,
-} from "vuex";
-import { mapState, mapActions } from "pinia";
-import { useUserStore } from "./pinia/user";
-import { store } from "./vuex/store";
+import HelloWorld from "./components/HelloWorld.vue"
+import OptionsComponent from "./components/OptionsComponent.vue"
+import { mapGetters as mapVuexGetters, mapActions as mapVuexActions } from "vuex"
+import { mapState, mapActions } from "pinia"
+import { useUserStore } from "./pinia/user"
+import { store } from "./vuex/store"
 
 export default {
   components: {
@@ -24,27 +21,24 @@ export default {
     ...mapVuexActions(["incrementRootCount"]),
     ...mapVuexActions("countModule", ["increment"]),
     logState() {
-      this.logPinia();
-      this.logVuex();
-      console.log("==============================");
+      this.logPinia()
+      this.logVuex()
+      console.log("==============================")
     },
     logPinia() {
-      console.group("[pinia]");
-      console.log("name: ", this.name);
-      console.log("vuex root count: ", this.getVuexRootCount());
-      console.log("vuex count from store: ", this.getVuexCountFromStore());
-      console.log(
-        "vuex count from useStore: ",
-        this.getVuexCountFromUseStore()
-      );
-      console.groupEnd();
+      console.group("[pinia]")
+      console.log("name: ", this.name)
+      console.log("vuex root count: ", this.getVuexRootCount())
+      console.log("vuex count from store: ", this.getVuexCountFromStore())
+      console.log("vuex count from useStore: ", this.getVuexCountFromUseStore())
+      console.groupEnd()
     },
     logVuex() {
-      console.group("[vuex]");
-      console.log("rootCount: ", store.getters.rootCount);
-      console.log("countModule count: ", store.state.countModule?.count);
-      console.log("$store count: ", this.$store.state.countModule?.count);
-      console.groupEnd();
+      console.group("[vuex]")
+      console.log("rootCount: ", store.getters.rootCount)
+      console.log("countModule count: ", store.state.countModule?.count)
+      console.log("$store count: ", this.$store.state.countModule?.count)
+      console.groupEnd()
     },
   },
   computed: {
@@ -53,9 +47,9 @@ export default {
     ...mapVuexGetters("countModule", ["count"]),
   },
   mounted() {
-    this.logState();
+    this.logState()
   },
-};
+}
 </script>
 
 <template>

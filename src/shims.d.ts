@@ -1,15 +1,15 @@
 declare module "*.vue" {
-  import { DefineComponent } from "vue";
-  const component: DefineComponent<{}, {}, any>;
-  export default component;
+  import { DefineComponent } from "vue"
+  const component: DefineComponent<{}, {}, any>
+  export default component
 }
 
-import { ComponentCustomProperties } from "vue";
-import { State } from "./vuex/store";
-import { Store } from "vuex";
+import { ComponentCustomProperties } from "vue"
+import { State } from "./vuex/store"
+import { Store } from "vuex"
 
 declare module "vue" {
   interface ComponentCustomProperties {
-    $store: Store<State>;
+    $store: Store<State>
   }
 }
