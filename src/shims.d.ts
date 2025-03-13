@@ -13,3 +13,9 @@ declare module "vue" {
     $store: Store<State>
   }
 }
+
+declare module "pinia" {
+  interface PiniaCustomProperties {
+    vuexStore: any
+  }
+}

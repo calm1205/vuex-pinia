@@ -1,6 +1,6 @@
 import { defineStore } from "pinia"
 import { store as vuexStore } from "../vuex/store"
-// import { useStore } from "vuex";
+// import { useStore } from "vuex"
 
 export const useUserStore = defineStore("user", {
   state: () => ({ name: "Eduardo" }),
@@ -21,8 +21,11 @@ export const useUserStore = defineStore("user", {
     },
     getVuexCountFromUseStore() {
       // This will throw an error because useStore is not available here
-      // const store = useStore();
-      // return store.state.countModule?.count;
+      // const store = useStore()
+      // return store.state.countModule?.count
+    },
+    getVuexCountFromPiniaPlugin() {
+      return this.vuexStore.state.countModule?.count
     },
     incrementVuexCount() {
       vuexStore.dispatch("countModule/increment")

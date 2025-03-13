@@ -16,6 +16,7 @@ export default {
       "getVuexRootCount",
       "getVuexCountFromStore",
       "getVuexCountFromUseStore",
+      "getVuexCountFromPiniaPlugin",
       "incrementVuexCount",
     ]),
     ...mapVuexActions(["incrementRootCount"]),
@@ -31,6 +32,7 @@ export default {
       console.log("vuex root count: ", this.getVuexRootCount())
       console.log("vuex count from store: ", this.getVuexCountFromStore())
       console.log("vuex count from useStore: ", this.getVuexCountFromUseStore())
+      console.log("vuex count from pinia plugin: ", this.getVuexCountFromPiniaPlugin())
       console.groupEnd()
     },
     logVuex() {
