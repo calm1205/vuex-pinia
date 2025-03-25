@@ -3,7 +3,8 @@ import HelloWorld from "./components/HelloWorld.vue"
 import OptionsComponent from "./components/OptionsComponent.vue"
 import { mapGetters as mapVuexGetters, mapActions as mapVuexActions } from "vuex"
 import { mapState, mapActions } from "pinia"
-import { useUserStore } from "./pinia/user"
+import { useUserStore } from "./pinia/useUserStore"
+import { useUserStore2 } from "./pinia/useUserStore2"
 import { store } from "./vuex/store"
 
 export default {
@@ -19,6 +20,7 @@ export default {
       "getVuexCountFromPiniaPlugin",
       "incrementVuexCount",
     ]),
+    ...mapActions(useUserStore2, ["callVuex"]),
     ...mapVuexActions(["incrementRootCount"]),
     ...mapVuexActions("countModule", ["increment"]),
     logState() {
@@ -33,6 +35,7 @@ export default {
       console.log("vuex count from store: ", this.getVuexCountFromStore())
       console.log("vuex count from useStore: ", this.getVuexCountFromUseStore())
       console.log("vuex count from pinia plugin: ", this.getVuexCountFromPiniaPlugin())
+      console.log("vuex count from pinia setup: ", this.callVuex())
       console.groupEnd()
     },
     logVuex() {

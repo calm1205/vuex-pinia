@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useUserStore } from "../pinia/user"
+import { useUserStore } from "../pinia/useUserStore"
 const store = useUserStore()
 const msg = store.name
 </script>
