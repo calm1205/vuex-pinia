@@ -5,6 +5,7 @@ export const useUserStore2 = defineStore("user2", () => {
   const vuexStore = ref()
 
   const callVuex = () => {
+    // setup storeだとアクセスできない
     return vuexStore.value.countModule.count
   }
 
