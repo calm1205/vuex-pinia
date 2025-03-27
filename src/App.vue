@@ -6,6 +6,7 @@ import { mapState, mapActions } from "pinia"
 import { useUserStore } from "./pinia/useUserStore"
 import { useUserStore2 } from "./pinia/useUserStore2"
 import { useUserStore as useOriginalUserStore } from "./originalStore/useUserStore"
+import { useLocalUserProvider } from "./originalStore/useLocalUserProvider"
 import { store } from "./vuex/store"
 
 export default {
@@ -61,6 +62,9 @@ export default {
   },
   mounted() {
     this.logState()
+  },
+  created() {
+    useLocalUserProvider()
   },
 }
 </script>
