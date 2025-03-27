@@ -12,9 +12,6 @@ const userState = ref<User>()
 
 /** 自作したUserStore */
 export const useUserStore = () => {
-  // readonlyで参照のみ可能に
-  const state = readonly(userState).value
-
   // ユーザー情報をセット
   const setUserState = (user: User) => (userState.value = user)
 
@@ -25,5 +22,9 @@ export const useUserStore = () => {
     return vuexCount
   }
 
-  return { state, setUserState, getVuexCount }
+  return {
+    state: readonly(userState),
+    setUserState,
+    getVuexCount,
+  }
 }
