@@ -5,6 +5,7 @@ import { mapGetters as mapVuexGetters, mapActions as mapVuexActions } from "vuex
 import { mapState, mapActions } from "pinia"
 import { useUserStore } from "./pinia/useUserStore"
 import { useUserStore2 } from "./pinia/useUserStore2"
+import { useUserStore as useOriginalUserStore } from "./originalStore/useUserStore"
 import { store } from "./vuex/store"
 
 export default {
@@ -23,9 +24,16 @@ export default {
     ...mapActions(useUserStore2, ["callVuex"]),
     ...mapVuexActions(["incrementRootCount"]),
     ...mapVuexActions("countModule", ["increment"]),
+    setOriginalUser() {
+      const { setUserState } = useOriginalUserStore()
+      setUserState({ id: 1, name: "hoge", email: "sample1@example.com" })
+    },
     logState() {
       this.logPinia()
       this.logVuex()
+      const { state, getVuexCount } = useOriginalUserStore()
+      console.log(state)
+      console.log(getVuexCount())
       console.log("==============================")
     },
     logPinia() {
@@ -67,6 +75,7 @@ export default {
     <button @click="incrementVuexCount">increment vuex count from pinia</button>
     <button @click="incrementRootCount">increment vuex root count</button>
     <button @click="logState">show log</button>
+    <button @click="setOriginalUser">set original user</button>
   </section>
 </template>
 

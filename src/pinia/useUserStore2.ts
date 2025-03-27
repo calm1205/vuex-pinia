@@ -6,7 +6,7 @@ export const useUserStore2 = defineStore("user2", () => {
 
   const callVuex = () => {
     // setup storeだとアクセスできない
-    return vuexStore.value.countModule.count
+    // return vuexStore.value.countModule.count
   }
 
   return { callVuex }
